@@ -19,5 +19,6 @@ namespace HotelBook.Data.Entities
 		public int Capacity { get; set; }
 		public bool FreeBreakfast { get; set; }
 		public Rent? Rent { get; set; }
+		public ICollection<RoomImage> RoomImages { get; set; }
 	}
 }
