@@ -22,8 +22,7 @@ namespace HotelBook.Data.Repositories.GenericRepositories
         }
         public async Task<T> CreateAsync(T entity)
         {
-           entity.CreatedDate = DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd HH:mm"));
-           entity.UpdatedDate = DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd HH:mm"));
+           
            entity.IsActive = true;
            var result = await _dbSet.AddAsync(entity);
            if(result.State == EntityState.Added)
@@ -62,9 +61,8 @@ namespace HotelBook.Data.Repositories.GenericRepositories
 
                 if (oldEntity != null)
                 {
-                    entry.Property(e => e.CreatedDate).CurrentValue = oldEntity.CreatedDate;
+                   
                     entry.Property(e => e.IsDeleted).CurrentValue = oldEntity.IsDeleted;
-                    entry.Property(e => e.UpdatedDate).CurrentValue = DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd HH:mm"));
                     var properties = typeof(T).GetProperties();
 
                     foreach (var property in properties)
@@ -98,7 +96,7 @@ namespace HotelBook.Data.Repositories.GenericRepositories
             return await Task.FromResult(_dbSet.AsNoTracking().AsQueryable());
         }
 
-        public IQueryable<T> GetBy(Expression<Func<T, bool>> predicate)
+        public  IQueryable<T> GetBy(Expression<Func<T, bool>> predicate)
         {
             return _dbSet.Where(predicate);
         }
